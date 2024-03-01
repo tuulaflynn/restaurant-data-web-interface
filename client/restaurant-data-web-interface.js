@@ -1,14 +1,11 @@
 function getRestaurants() {
-    fetch(`http://localhost:8088/proxy`)
+    fetch(`http://localhost:8088/byPostcode/getFirst10Restaurants`)
         .then(res => {
             if (!res.ok) {
                 throw new Error('Response was not ok');
             }
-            return res.json();
-        })
-        .then(data => {
-            let restaurants = data.restaurants
-            console.log(restaurants);
+            console.log("Success")
+            return res
         })
         .catch(e => {
             console.error('There was a problem with the fetch operation:', e);
