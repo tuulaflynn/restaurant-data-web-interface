@@ -5,8 +5,9 @@ function getRestaurants() {
                 throw new Error('Response was not ok');
             }
             console.log("Success")
-            return res
+            return res.json();
         })
+        .then(data => { console.log(data); })
         .catch(e => {
             console.error('There was a problem with the fetch operation:', e);
         });
