@@ -16,26 +16,26 @@ function getRestaurants() {
 
                 // Build the content to put into populate each card with restaurant data
                 content += `
-                    <div class="card m-4 border" style="width: 18rem;">
+                    <div class="card m-4 border col-lg-3 col-md-6 col-12" style="width: 18rem;">
                         <div class="card-body">
-                        <h5 class="card-title">${restaurant.name}</h5>
-                        <h6 class="card-subtitle mb-2 text-body-secondary">Star Rating: ${ratingJsObject.starRating}</h6>
-                        <p class="card-text">
-                            <address> 
-                            ${addressJsObject.firstLine} <br>
-                            ${addressJsObject.city}<br>
-                            ${addressJsObject.postalCode}<br>
-                            </address>
-                        </p>
-                        <details>
-                        <summary class="cursor-pointer">Cuisines</summary>
-                        <ul class="list-group list-group-flush">`;
+                            <h5 class="card-title">${restaurant.name}</h5>
+                            <h6 class="card-subtitle mb-2 text-body-secondary">Star Rating: ${ratingJsObject.starRating}</h6>
+                            <p class="card-text">
+                                <address> 
+                                ${addressJsObject.firstLine} <br>
+                                ${addressJsObject.city}<br>
+                                ${addressJsObject.postalCode}<br>
+                                </address>
+                            </p>
+                            <details>
+                            <summary class="cursor-pointer">Cuisines</summary>
+                            <ul class="list-group list-group-flush">`;
                 restaurant.cuisines.forEach(cuisine => {
                     content += `<li class="list-group-item">${cuisine}</li>`;
                 })
                 content += `
-                        </ul>
-                        </details>
+                            </ul>
+                            </details>
                         </div>
                     </div>`;
             });
