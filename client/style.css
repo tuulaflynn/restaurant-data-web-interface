@@ -21,6 +21,7 @@ body {
 .card:hover {
     /* Border colour changes from transparent to black on hover */
     border-color: black;
+    cursor: pointer;
 }
 
 

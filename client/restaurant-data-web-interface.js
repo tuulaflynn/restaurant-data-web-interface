@@ -7,22 +7,26 @@ function getRestaurants(postcode = null) {
             if (!res.ok) {
                 const postcode_data_unavailable_content = `<p> Sorry we can't find any restaurants with postcode '${postcode}'. Please enter another postcode. </p>`;
                 document.getElementById("card-group-to-populate").innerHTML = postcode_data_unavailable_content;
-                throw new Error('server response or client request was not ok.');
+                throw new Error("server response or client request was not ok.");
             }
             console.log("Success")
             return res.json();      // a json array is received from the enpdoint in 'res' and parsed into a JavaScript object using json().
         })
         .then(data => {
             let content = ``;
+            let count = 1;
             data.forEach(restaurant => {
+
                 // Nested value in received resturant object is a JSON string, parse these into javascript objects.
                 let ratingJsObject = JSON.parse(restaurant.ratings.rating);
                 let addressJsObject = JSON.parse(restaurant.address.address);
 
                 // Build the content by populating each card with restaurant data.
+                // Added count as a parameter to toggleCuisines function to unique identify each card is being clicked. 
+                // The details tag also has an id which is dynamically generated, this is so the dropdown toggled corresponds to the card clicked.
                 content += `
                     <div class="card m-4  col-lg-3 col-md-6 col-12" style="width: 18rem;">
-                        <div class="card-body">
+                        <div class="card-body" onclick="toggleCuisines(${count})">
                             <h5 class="card-title">${restaurant.name}</h5>
                             <h6 class="card-subtitle mb-2 text-body-secondary">Star Rating: ${ratingJsObject.starRating}</h6>
                             <p class="card-text">
@@ -32,7 +36,7 @@ function getRestaurants(postcode = null) {
                                 ${addressJsObject.postalCode}<br>
                                 </address>
                             </p>
-                            <details>
+                            <details id="cuisines-dropdown-${count}">
                             <summary class="cursor-pointer">Cuisines</summary>
                             <ul class="list-group list-group-flush">`;
                 restaurant.cuisines.forEach(cuisine => {
@@ -43,23 +47,30 @@ function getRestaurants(postcode = null) {
                             </details>
                         </div>
                     </div>`;
+                count = count + 1;
             });
 
             // Set the html element 'card-group-to-populate' which is a fluid container to the list of cards created in the forEach block above.
             document.getElementById("card-group-to-populate").innerHTML = content;
         })
         .catch(e => {
-            console.error('There was a problem with the fetch operation:', e);
+            console.error("There was a problem with the fetch operation:", e);
         });
 }
 
 // Call getRestaurants initially to fetch data when the page loads.
 getRestaurants();
 
+// For the details tag (which contains the cuisines list) if it's open attribue is true, set it to false and vice versa. 
+function toggleCuisines(count) {    // Function is called on event of clicking on a card body.
+    let detailsTag = document.getElementById("cuisines-dropdown-" + count);
+    detailsTag.open = !detailsTag.open;
+};
+
 // Event handler for form submission event.
-document.getElementById('postcode-form').addEventListener('submit', function (event) {
+document.getElementById("postcode-form").addEventListener("submit", function (event) {
     // First parameter of callack function is automatically populated with an event object which contains associated information about the event.
     event.preventDefault();     // Prevent the default form submission behavior associated with event e.g. using action, method attributes to send the form.
-    const postcode = document.getElementById('postcode').value;     // Retrieves value entered into an input field.
+    const postcode = document.getElementById("postcode").value;     // Retrieves value entered into an input field.
     getRestaurants(postcode);   // Fetch data with the postcode the user entered.
 });
