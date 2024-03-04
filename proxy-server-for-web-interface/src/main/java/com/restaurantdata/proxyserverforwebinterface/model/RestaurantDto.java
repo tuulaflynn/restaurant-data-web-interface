@@ -14,6 +14,6 @@ import java.util.Map;
 public class RestaurantDto {
     private String name;
     private List<String> cuisines;
-    private Map<String, Object> ratings;
-    private Map<String, Object>  address;
+    private Map<String, String> ratings;
+    private Map<String, String>  address;
 }

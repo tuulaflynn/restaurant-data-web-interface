@@ -5,6 +5,6 @@ import com.restaurantdata.proxyserverforwebinterface.model.RestaurantDto;
 import java.util.List;
 
 public interface RestaurantService {
-    List<RestaurantDto> getFirst10Restaurants();
+    List<RestaurantDto> getFirst10Restaurants(String postcode);
 
 }
