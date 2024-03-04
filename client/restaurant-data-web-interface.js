@@ -21,7 +21,7 @@ function getRestaurants(postcode = null) {
 
                 // Build the content by populating each card with restaurant data.
                 content += `
-                    <div class="card m-4 border col-lg-3 col-md-6 col-12" style="width: 18rem;">
+                    <div class="card m-4  col-lg-3 col-md-6 col-12" style="width: 18rem;">
                         <div class="card-body">
                             <h5 class="card-title">${restaurant.name}</h5>
                             <h6 class="card-subtitle mb-2 text-body-secondary">Star Rating: ${ratingJsObject.starRating}</h6>

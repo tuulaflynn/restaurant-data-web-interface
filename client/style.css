@@ -1,0 +1,32 @@
+body {
+    background-color: #facc87;
+    font-family: var(--bs-font-sans-serif);
+    /* Found from inspecting bootstrap cards font family. I want to use the default sans-serif font family used by Bootstrap for all font on my interface, 
+    I'm not sure if I can access a custom Bootstrap property like this.*/
+
+}
+
+#header-container {
+    background-color: #ffae36;
+}
+
+.card {
+    background-color: #f8dfb9;
+    /* Set initial border to transparent */
+    border: 1px solid transparent;
+    /* Add transition effect for smooth transition to border*/
+    transition: border-color 0.2s;
+}
+
+.card:hover {
+    /* Border colour changes from transparent to black on hover */
+    border-color: black;
+}
+
+
+/* Styling rules which target the child bootstrap class, list-group-item, of the card class */
+.card .list-group-item {
+    background-color: #f6e7d0;
+    /* bottom margin is set to 1.5% of the height of the screen */
+    margin-bottom: 1.5%;
+}
